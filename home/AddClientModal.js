@@ -8,10 +8,10 @@ export const modalEnum = {
 }
 
 const initState = {
-  name: "",
-  phone: "",
-  spent: "",
-  billed: "",
+  name: "Ahmed",
+  phone: "01091949849",
+  spent: "10000",
+  billed: "1009",
 }
 
 export function AddClientModal({ modalState, setModalState, handleOk, handleClose }) {
@@ -26,19 +26,23 @@ export function AddClientModal({ modalState, setModalState, handleOk, handleClos
     })
   }
 
+  function handleOkPress() {
+    handleOk(state)
+  }
+
   return (
     <Modal
       onCancel={handleClose}
       title="Add Client"
       visible={isVisible}
-      onOk={handleOk}
+      onOk={handleOkPress}
       confirmLoading={isLoading}
       okText="Add Client"
       cancelButtonProps={{
         hidden: true,
       }}
     >
-      <Form>
+      <Form initialValues={initState}>
         <Form.Item label="Name" name="name">
           <Input value={state.name} name="name" onChange={handleChange} />
         </Form.Item>

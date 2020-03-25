@@ -1,33 +1,74 @@
 import { Table, PageHeader, Modal, Button, Row } from "antd"
 import { PlusCircleFilled } from "@ant-design/icons"
 import Router from "next/router"
+import dynamic from "next/dynamic"
 
 import { modalEnum, AddClientModal } from "./AddClientModal"
 
-const dataSource = []
-
 const columns = [
-  { title: "Name", dataIndex: "name", key: "name" },
-  { title: "Phone", dataIndex: "phone", key: "phone" },
-  { title: "Spent", dataIndex: "spent", key: "spent" },
-  { title: "Billed", dataIndex: "billed", key: "billed" },
-  { title: "Remaining", dataIndex: "remaining", key: "remaining" },
+  {
+    title: "Name",
+    render: function(text, record, index) {
+      return <div>something</div>
+    },
+  },
+  {
+    title: "Phone",
+    render: function(text, record, index) {
+      return <div>something</div>
+    },
+  },
+  {
+    title: "Spent",
+    render: function(text, record, index) {
+      return <div>something</div>
+    },
+  },
+  {
+    title: "Billed",
+    render: function(text, record, index) {
+      return <div>something</div>
+    },
+  },
+  {
+    title: "Remaining",
+    render: function(text, record, index) {
+      return <div>something</div>
+    },
+  },
 ]
 
-export default () => {
-  const [dataSource, setDataSource] = React.useState(() => {
-    if (typeof window === "undefined") return []
-    return window.localStorage.getItem("CLIENTS") || []
-  })
+function getClients() {
+  const clients = JSON.parse(window.localStorage.getItem("CLIENTS"))
+  console.log(clients)
+  return clients ? clients : {}
+}
 
+function Home() {
+  const [dataSource, setDataSource] = React.useState([])
   const [modalState, setModalState] = React.useState(modalEnum.hidden)
 
   React.useEffect(() => {
-    localStorage.setItem("CLIENTS", dataSource)
-  }, [dataSource])
+    const clients = getClients()
+    console.log({ clients })
+    setDataSource(clients)
+  }, [])
 
-  function handleOk() {
+  React.useEffect(() => {}, [dataSource])
+
+  function handleOk(clt) {
     setModalState(modalEnum.loading)
+    const key = Date.now()
+    const client = { key, ...clt }
+    localStorage.setItem(key, JSON.stringify(client))
+    dataSource[key] = {}
+    localStorage.setItem("CLIENTS", JSON.stringify(dataSource))
+
+    setDataSource({
+      ...dataSource,
+    })
+
+    setModalState(modalEnum.hidden)
   }
 
   function handleClose() {
@@ -42,14 +83,18 @@ export default () => {
         </PageHeader>
         <PlusCircleFilled style={{ margin: 20, fontSize: 25 }} onClick={() => setModalState(modalEnum.show)} />
       </Row>
+      {console.log()}
       <Table
-        dataSource={dataSource}
+        dataSource={Object.keys(dataSource).map(key => ({ key }))}
         columns={columns}
         onRow={record => ({
-          onClick: () => Router.push(`/details/${record.key}`),
+          onClick: e => Router.push(`/details/[key]`, `/details/${record.key}`),
         })}
       />
+
       <AddClientModal modalState={modalState} setModalState={setModalState} handleClose={handleClose} handleOk={handleOk} />
     </div>
   )
 }
+
+export default Home
