@@ -15,18 +15,28 @@
         align-items: center;
         background: #0336ff;
         flex-direction: column;
-      }
-
-      h1 {
         color: white;
         font-family: Arial, Helvetica, sans-serif;
         font-variant: small-caps;
-        font-size: 7vw;
       }
+
+      .title {
+        font-size: 7vw;
+        margin-bottom: 1vw;
+      }
+
+      .number {
+        margin: 0;
+        font-size: 4vw;
+        color: white;
+        text-decoration: none;
+      }
+
       .content {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         flex: 1;
       }
 
@@ -38,9 +48,11 @@
   </head>
   <body>
     <div class="content">
-      <h1>
+      <h1 class="title">
         under construction
       </h1>
+      <h1 class="number"></h1>
+      <a class="number" href="tel:01099992818">01099992818</a>
     </div>
     <div class="footer">
       <p>Eng: Mohamed Elghaznawy</p>
