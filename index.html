@@ -20,14 +20,27 @@ body {
   background-color: #01193b;
 }
 
-      img {
+      .image-container {
         width: 100%;
-        max-width: 550px;
+        height: 70vh;
         margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
       }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
     </style>
   </head>
+
   <body>
-    <img src="image.jpeg" alt="stark elevators" />
+    <div class="image-container">
+      <img src="image.jpeg" alt="stark elevators" />
+      <div>
   </body>
 </html>
