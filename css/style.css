@@ -42,8 +42,9 @@ body a {
 }
 
 .logo > img {
-  max-width: 150px;
-  max-width: 150px;
+  margin-top: 50px;
+  max-width: 200px;
+  max-width: 200px;
   background-color: #fff;
   border-radius: 100%;
 }
@@ -191,7 +192,7 @@ p.bottom_desc {
   width: 216px;
   height: 80px;
   display: inline-block;
-	/* background: url(../images/logo.png) no-repeat 0px 5px; */
+  /* background: url(../images/logo.png) no-repeat 0px 5px; */
   vertical-align: middle;
 }
 .navbar-nav li.active a,
@@ -871,6 +872,7 @@ li.google a span:hover {
   }
   .right-msg span {
     background: url(../images/logo_small.png) no-repeat 0px -5px;
+    opacity: 0;
   }
   .contact-form input[type="text"] {
     width: 25%;
